@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="loginForm">
+           <div class="sign-up">
+            <h1>Login</h1>
+            <p>Please fill in this form to Login your Account!</p>
+           </div>
+            <div class="input-data">
+                  <!-- <label for="fname">First Name:</label> -->
+           <input type="email" id="email" name="email" placeholder="Email" required>
+           <div id="emailErrorMessage">Please Enter a Valid Email id</div>
+           <!-- <label for="password">password:</label> -->
+           <input type="password" name="password" id="password" placeholder="Password" required>
+           <div class="checkbox">
+            <input type="checkbox" name="" id="showPassword">
+            <label for=""><p>Show Password</p></label>
+          </div>
+            </div>
+         <div class="login-sec">
+            <div class="checkbox">
+                <input type="checkbox" name="" id="">
+                <label for="">Remember me</label><br>
+              </div>
+              <div class="forgot-pass"><p><a href="#">Forgot Password?</a></p></div>
+         </div>
+           <input type="submit" value="Login Now" class="btn" id="loginBtn">
+           <p>Don't have an account? <a href="signup.html">Signup</a></p>
+           <div id="loginError"></div>
+        </form>
+    </div>
+</body>
+<script src="login.js"></script>
+</html>

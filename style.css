@@ -1,0 +1,214 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(14, 159, 237, 0.797);
+
+   
+}
+.input-data input{
+    border:none;
+    padding: 13px 9px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 3px;
+    font-size: 16px;
+    outline: none;
+}
+.input-data input:hover{
+    background-color: rgb(224, 222, 222); 
+}
+form .sign-up{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    opacity: 0.8;
+}
+form p{
+    color:rgb(109, 106, 106); 
+}
+form p a{
+    text-decoration: none;
+    color:rgb(0, 140, 255);
+}
+form .checkbox{
+    display: flex;
+    gap:7px;
+    color:rgb(109, 106, 106);
+}
+form .checkbox a{
+    text-decoration: none;
+    color:rgb(0, 140, 255);
+}
+form .name{
+display: flex;
+gap:20px;
+}
+.login-sec{
+    display: flex;
+    justify-content: space-between;
+}
+.emailErrorMessage{
+    color:red;
+}
+@media screen and (min-width:320px){
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        background-color: white;
+        padding:17px 15px;
+        border-radius: 3px;
+        gap:14px;
+        width: 90%;
+        margin: auto;
+    }
+    form .input-data {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .input-data input {
+        border: none;
+        padding: 10px 5px;
+        background-color: rgb(238, 238, 238);
+        border-radius: 3px;
+        font-size: 9px;
+        outline: none;
+    }
+    form .name{
+        display: flex;
+        gap:4px;
+        }
+        form .sign-up h1{
+            font-size: 22px;
+        }
+        form  p {
+            color: rgb(109, 106, 106);
+            font-size: 11px;
+        }
+        #emailErrorMessage,#passError,#pass2Error, #signupError, #loginError{
+            color: red;
+            display: none;
+            font-size: 10px;
+        }
+        .checkbox label{
+            font-size:11px;
+        }
+        .btn {
+            padding: 7px 17px;
+            background-color: rgb(5, 139, 248);
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 11px;
+            font-weight: 550;
+            float: left;
+            cursor: pointer;
+        }
+}
+@media screen and (min-width:425px){
+    .input-data input {
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+    form .name {
+        gap: 13px;
+    }
+    form .input-data {
+        gap: 13px;
+    }
+    form .sign-up h1 {
+        font-size: 28px;
+    }
+    form p {
+        font-size: 14px;
+    }
+    .checkbox label {
+        font-size: 14px;
+    }
+    .btn{
+        padding: 10px 25px;
+        font-size: 15px;
+    }
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+    form{
+    width: 90%;
+    margin: auto;
+    }
+    #emailErrorMessage,#passError,#pass2Error, #signupError, #loginError{
+        font-size: 11px;
+    }
+}
+@media screen and (min-width:768px){
+    .input-data input {
+        padding: 15px 11px;
+        font-size: 14px;
+    }
+    form .input-data {
+        gap: 20px;
+    }
+    form .sign-up h1 {
+        font-size: 31px;
+    }
+    form  p {
+        font-size: 16px;
+    }
+    .checkbox label {
+        font-size: 16px;
+    }
+    .btn {
+        padding: 11px 19px;
+        font-size: 14px;
+    }
+    form{
+        width: 60%;
+        margin: auto;
+        }
+        #emailErrorMessage,#passError,#pass2Error, #signupError, #loginError{
+            font-size: 13px;
+        }
+}
+@media screen and (min-width:1024px){
+    form{
+        width: 40%;
+        margin: auto;
+        padding: 40px 30px;
+    }
+    form .input-data{
+        gap:20px;
+    }
+    .input-data input{
+        padding: 13px 9px;
+        font-size: 16px;
+    }
+    form .name{
+        gap:20px;
+        }
+        form .sign-up h1{
+            font-size: 34px;
+        }
+        form p {
+            font-size: 15px;
+        }
+        .checkbox label{
+            font-size:15px;
+        }
+        .btn{
+            padding: 10px 25px;
+            font-size: 15px;
+        }
+        #emailErrorMessage,#passError,#pass2Error, #signupError, #loginError{
+            font-size: 13px;
+        }
+}

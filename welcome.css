@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+.container{
+    height: 100vh;
+    width: 100vw;
+    background-image: url(welcomee.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+ul{
+    list-style: none;
+    
+}
+ul li{
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 550;
+    font-size:20px;
+    cursor: pointer;
+
+}
+.btn {
+    padding: 6px 24px;
+    border: 2px solid #100101;
+    background: transparent;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: 550;
+    font-size:20px;
+}
+.btn a{
+    text-decoration: none;
+    color:black
+}
+iframe{
+    height: 90vh;
+    width: 90vw;
+}
