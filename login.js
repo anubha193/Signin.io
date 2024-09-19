@@ -2,11 +2,12 @@ const email = document.getElementById("email");
 const pass = document.getElementById("password");
 const loginError = document.getElementById("loginError");
 const showPasswordCheckbox = document.getElementById("showPassword");
-const emailError=document.getElementById("emailErrorMessage");
+const emailError = document.getElementById("emailErrorMessage");
 
 showPasswordCheckbox.addEventListener("change", () => {
     pass.type = showPasswordCheckbox.checked ? "text" : "password";
 });
+
 function validateEmailRegex(email) {
     return String(email)
         .toLowerCase()
@@ -21,6 +22,7 @@ email.addEventListener("change", (event) => {
     else
         emailError.style.display = "block";
 });
+
 document.getElementById("loginForm").addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -40,7 +42,9 @@ document.getElementById("loginForm").addEventListener("submit", (event) => {
             loginError.innerText = result.error;
             loginError.style.display = "block";
         } else {
+            console.log(result);
             localStorage.setItem('userDataObj', JSON.stringify(result.user));
+            localStorage.setItem('jwtToken', result.token);  // Store JWT token in localStorage
             window.location = 'dashboard.html';
         }
     })

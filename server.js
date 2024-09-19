@@ -2,6 +2,8 @@ const http = require('http');
 const mysql = require('mysql2');
 const url = require('url');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
+const secretKey = 'Anubhav@@102030'; 
 
 // Database connection
 const connection = mysql.createConnection({
@@ -24,14 +26,35 @@ const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
 
     // Add CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // Allow specific methods
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Allow specific headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Include Authorization header
 
     if (req.method === 'OPTIONS') {
         res.writeHead(204); // No content response for OPTIONS preflight requests
         res.end();
         return;
+    }
+
+    // Middleware function to authenticate JWT token
+    function authenticateToken(req, res, next) {
+        const authHeader = req.headers['authorization']; // Get the authorization header
+        const token = authHeader && authHeader.split(' ')[1]; // Bearer token format
+
+        if (token == null) {
+            res.writeHead(401, { 'Content-Type': 'application/json' });
+            return res.end(JSON.stringify({ error: 'No token provided' }));
+        }
+
+        jwt.verify(token, secretKey, (err, user) => {
+            if (err) {
+                res.writeHead(403, { 'Content-Type': 'application/json' });
+                return res.end(JSON.stringify({ error: 'Invalid token' }));
+            }
+
+            req.user = user; // Attach the user information to the request
+            next();
+        });
     }
 
     if (req.method === 'POST' && parsedUrl.pathname === '/signup') {
@@ -53,8 +76,11 @@ const server = http.createServer((req, res) => {
                 }
 
                 if (results.length > 0) {
-                    res.writeHead(400, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: 'User already exists' }));
+                    const user = results[0];
+                    const token = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
+
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ message: 'Login successful!', token: token }));
                 } else {
                     // Insert the new user into the database
                     const insertUserQuery = 'INSERT INTO users (fname, sname, email, password) VALUES (?, ?, ?, ?)';
@@ -87,14 +113,16 @@ const server = http.createServer((req, res) => {
                     res.writeHead(500, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Database error' }));
                 } else if (results.length > 0) {
+                    const user = results[0];
+                    const token = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
+
                     res.writeHead(200, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ message: 'Login successful!', user: results[0] }));
+                    res.end(JSON.stringify({ message: 'Login successful!', token: token ,user:user }));
                 } else {
                     res.writeHead(401, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify({ error: 'Invalid email or password' }));
                 }
             });
-            
         });
 
     } else {
@@ -121,4 +149,5 @@ function getContentType(pathname) {
     if (pathname.endsWith('.css')) return 'text/css';
     return 'application/octet-stream';
 }
+
 
